@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.10'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.study.inflearn.spring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	
+	//java 표준 Provider(prototype scope bean exmaple)
+	implementation 'javax.inject:javax.inject:1'
+	
+	//spring boot
+	//web 라이브러리가 없으면 -> AnnotationConfigApplicationContext를 기반으로 애플리케이션 구동
+	//web 라이브러리가 추가되면 -> 웹과 관련된 추가 설정들과 환경들이 필요하므로 AnnotationConfigServletWebServerApplicationContext를 기반으로 애플리케이션 구동
+	//web(request scope bean example)
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	//Lombok
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
